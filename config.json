@@ -1,0 +1,39 @@
+{
+	"connections":[
+		{
+			"fromDevice":{
+				"server":"shop1",
+				"name":"NorthShopSwitch",
+				"property":"level"
+			},
+			"toDevice":{
+				"server":"shop1",
+				"name":"NorthShopLight",
+				"transitions": [
+					{"transition":"toggle-output", "arguments":[], "acceptsMessage":false}
+				]
+			}
+		},
+		{
+			"fromDevice":{
+				"name":"SouthShopSwitch",
+				"property":"level"
+			},
+			"toDevice":{
+				"name":"SouthShopLight",
+				"transitions": [
+					{"transition":"toggle-output", "arguments":[], "acceptsMessage":false}
+				]
+			}
+		}
+	]
+}
+			
+
+
+
+
+
+
+
+
