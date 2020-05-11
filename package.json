@@ -1,6 +1,6 @@
 {
   "name": "@agilatech/lynxari-propagate-application",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Lynxari Server App for propagation from one device property to another device transition",
   "main": "loader.js",
   "scripts": {
