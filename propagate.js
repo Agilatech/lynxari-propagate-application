@@ -31,20 +31,19 @@ module.exports = class Propagate {
                             this.server.where({name:this.toDevice.name}) : 
                             this.server.from(this.toDevice.server).where({name:this.toDevice.name});
 
-		const self = this;
+		this.server.observe([fromDeviceQuery, toDeviceQuery], (from, to) => {
 
-		this.server.observe([fromDeviceQuery, toDeviceQuery], function(from, to) {
+      from.streams[this.fromDevice.property].on('data', (message) => {
 
-      from.streams[self.fromDevice.property].on('data', function(message) {
-
-        self.toDevice.transitions.forEach(function(trans, index) {
+        this.toDevice.transitions.forEach((trans, index) => {
 
           // if the receiving transition wants to use the message, tack it on to the end of the argument array
           if (trans.acceptsMessage) {
-            trans.arguments.push(message.data);
+            to.call(trans.transition, ...trans.arguments, message.data);
           }
-
-          to.call(trans.transition, ...trans.arguments);
+          else {
+            to.call(trans.transition, ...trans.arguments);
+          }
         });
 
       });
